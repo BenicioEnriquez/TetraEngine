@@ -63,9 +63,42 @@ public class TetraMesh : MonoBehaviour
                         tris.Add(i2);
                         tris.Add(i4);
                     }
-                    else if (CheckSideMatches(i1, i2, i4, con) > -1)
+                    else
                     {
+                        Mesh temp = con.collider.GetComponent<MeshFilter>().mesh;
+                        int b1 = temp.triangles[con.triangleIndex * 3];
+                        int b2 = temp.triangles[con.triangleIndex * 3 + 1];
+                        int b3 = temp.triangles[con.triangleIndex * 3 + 2];
 
+                        int matches = CheckSideMatches(i1, i2, i4, b1, b2, b3);
+                        Debug.Log(matches);
+
+                        if (matches == 0)
+                        {
+                            tris.Add(i1);
+                            tris.Add(i2);
+                            tris.Add(b1);
+
+                            tris.Add(b1);
+                            tris.Add(b2);
+                            tris.Add(i1);
+
+                            tris.Add(i3);
+                            tris.Add(i1);
+                            tris.Add(b2);
+
+                            tris.Add(b2);
+                            tris.Add(b3);
+                            tris.Add(i3);
+                            
+                            tris.Add(i2);
+                            tris.Add(i3);
+                            tris.Add(b3);
+
+                            tris.Add(b3);
+                            tris.Add(b1);
+                            tris.Add(i2);
+                        }
                     }
 
                     //2
@@ -81,7 +114,40 @@ public class TetraMesh : MonoBehaviour
                     }
                     else
                     {
-                        
+                        Mesh temp = con.collider.GetComponent<MeshFilter>().mesh;
+                        int b1 = temp.triangles[con.triangleIndex * 3];
+                        int b2 = temp.triangles[con.triangleIndex * 3 + 1];
+                        int b3 = temp.triangles[con.triangleIndex * 3 + 2];
+
+                        int matches = CheckSideMatches(i1, i2, i4, b1, b2, b3);
+                        Debug.Log(matches);
+
+                        if (matches == 0)
+                        {
+                            tris.Add(i1);
+                            tris.Add(i2);
+                            tris.Add(b1);
+
+                            tris.Add(b1);
+                            tris.Add(b2);
+                            tris.Add(i1);
+
+                            tris.Add(i3);
+                            tris.Add(i1);
+                            tris.Add(b2);
+
+                            tris.Add(b2);
+                            tris.Add(b3);
+                            tris.Add(i3);
+
+                            tris.Add(i2);
+                            tris.Add(i3);
+                            tris.Add(b3);
+
+                            tris.Add(b3);
+                            tris.Add(b1);
+                            tris.Add(i2);
+                        }
                     }
 
                     //3
@@ -97,7 +163,40 @@ public class TetraMesh : MonoBehaviour
                     }
                     else
                     {
-                        
+                        Mesh temp = con.collider.GetComponent<MeshFilter>().mesh;
+                        int b1 = temp.triangles[con.triangleIndex * 3];
+                        int b2 = temp.triangles[con.triangleIndex * 3 + 1];
+                        int b3 = temp.triangles[con.triangleIndex * 3 + 2];
+
+                        int matches = CheckSideMatches(i1, i2, i4, b1, b2, b3);
+                        Debug.Log(matches);
+
+                        if (matches == 0)
+                        {
+                            tris.Add(i1);
+                            tris.Add(i2);
+                            tris.Add(b1);
+
+                            tris.Add(b1);
+                            tris.Add(b2);
+                            tris.Add(i1);
+
+                            tris.Add(i3);
+                            tris.Add(i1);
+                            tris.Add(b2);
+
+                            tris.Add(b2);
+                            tris.Add(b3);
+                            tris.Add(i3);
+
+                            tris.Add(i2);
+                            tris.Add(i3);
+                            tris.Add(b3);
+
+                            tris.Add(b3);
+                            tris.Add(b1);
+                            tris.Add(i2);
+                        }
                     }
 
                     m.vertices = verts.ToArray();
@@ -108,12 +207,8 @@ public class TetraMesh : MonoBehaviour
         }
     }
 
-    public int CheckSideMatches(int a1, int a2, int a3, RaycastHit hit)
+    public int CheckSideMatches(int a1, int a2, int a3, int b1, int b2, int b3)
     {
-        Mesh temp = hit.collider.GetComponent<MeshFilter>().mesh;
-        int b1 = temp.triangles[hit.triangleIndex * 3];
-        int b2 = temp.triangles[hit.triangleIndex * 3 + 1];
-        int b3 = temp.triangles[hit.triangleIndex * 3 + 2];
         int count = 0;
         count += a1 == b1 ? 1 : 0;
         count += a1 == b2 ? 1 : 0;
